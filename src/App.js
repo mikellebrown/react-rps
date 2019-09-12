@@ -1,26 +1,72 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import { Container, Header, Button } from 'semantic-ui-react';
+import Choice from './Choice';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+  state = {
+    choices: [ 
+      { id: 1, name: "Rock" },
+      { id: 2, name: "Paper" },
+      { id: 3, name: "Scissors" },
+       ],
+
+       userChoice:'',
+       compChoice:''
+
+  };
+
+  handleClick(id) {
+    const compChoice = Math.floor((1+ (Math.random()) * 3));
+    const userChoice = id 
+    this.setState({ userChoice, compChoice });
+
+
+
+
+
+    
+
+  };
+
+    render() {
+    return (
+      <Container style={styles.container}  textAlign="center" >
+         <Header as="h1" >Rock Paper Scissors</Header>
+         <br />
+       <Button onClick={() => this.handleClick(1)}>
+          <Button.Content>Rock</Button.Content>
+          <br />
+          <Button.Content><i class="hand rock outline icon"></i></Button.Content>
+        </Button>
+        <Button onClick={() => this.handleClick(2)}>
+          <Button.Content>Paper</Button.Content>
+          <br />
+          <Button.Content><i class="hand paper outline icon"></i></Button.Content>
+        </Button>
+        <Button onClick={() => this.handleClick(3)}>
+          <Button.Content>Scissors</Button.Content>
+          <br />
+          <Button.Content><i class="hand scissors outline icon"></i></Button.Content>
+        </Button>
+    
+        <Choice choices={this.state.choices}  />
+       
+        
+  </Container>
+
+
+    );
+  };
+};
+
+const styles = {
+  container: {
+    margintop: "25px"
+  }
+};
+
+
+
 
 export default App;
